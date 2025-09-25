@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class ComandosWindows extends Comandos {
     public void lanzarping(String ip) {
         try {
-            ProcessBuilder pb = new ProcessBuilder("cmd","/c","ping -n 3 " + ip);
+            ProcessBuilder pb = new ProcessBuilder("cmd","/c","ping -n 5 " + ip);
             Process proceso = pb.start();
             BufferedReader br = new BufferedReader(new InputStreamReader(proceso.getInputStream()));
             String linea;
@@ -21,8 +21,8 @@ public class ComandosWindows extends Comandos {
         try {
             File file = new File(archivo);
             ProcessBuilder pb = new ProcessBuilder("cmd","/c","dir");
-            Process proceso = pb.start();
             pb.redirectOutput(file);
+            pb.start();
         } catch (IOException e) {
             e.printStackTrace();
         }
