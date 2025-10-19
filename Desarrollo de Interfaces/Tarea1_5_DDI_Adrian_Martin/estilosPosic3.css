@@ -1,0 +1,64 @@
+* {
+	margin: 10px;
+	padding: 10px;
+}
+.contenedor {
+	position: relative;
+	border: 3px dashed olive;
+	text-align: center;
+	display: flex;
+	flex-flow: row wrap;
+}
+.contenedor:hover {
+	background-color: darkolivegreen;
+}
+.c1 {
+	width: 70%;
+	height: 30%;
+	background-color: cadetblue;
+}
+.c2 {
+	width: 70%;
+	height: 50px;
+	background-color: darkcyan;
+	top: -20px;
+	right: -20px;
+}
+.c3 {
+	width: 70%;
+	height: 80px;
+	background-color: darkseagreen;
+	top: -40px;
+	right: -40px;
+}
+.caja {
+	position: relative;
+	border: 2px dotted blue;
+	text-align: center;
+	width: 15%;
+	height: 15%;
+}
+.caja:hover {
+	background-color: darkorange;
+}
+.h1 {
+	top: 15px;
+	right: 15px;
+	background-color: chocolate;   
+}
+.h2 {
+	top: -15px;
+	left: -55px;
+	background-color: coral;
+}
+.h3 {
+	top: 5px;
+	left: -120px;
+	background-color: darksalmon;
+}
+.control {
+	padding-top: 0;
+	padding-bottom: 0;
+	margin-top: 0;
+	margin-bottom: 0;
+}
