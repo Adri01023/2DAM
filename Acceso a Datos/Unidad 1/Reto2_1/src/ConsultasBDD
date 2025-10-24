@@ -1,0 +1,32 @@
+EJERCICIO-1
+show databases;
+use adat1;
+show tables;
+CREATE TABLE alumnos (
+    DNI VARCHAR(9),
+    nombre VARCHAR(20),
+    apellidos VARCHAR(20),
+    CP VARCHAR(5)
+);
+INSERT INTO alumnos (DNI, nombre, apellidos, CP) 
+VALUES ('12345678A', 'Ana', 'García López', '28001');
+
+INSERT INTO alumnos (DNI, nombre, apellidos, CP) 
+VALUES ('87654321B', 'Carlos', 'Martínez Ruiz', '41002');
+
+INSERT INTO alumnos (DNI, nombre, apellidos, CP) 
+VALUES ('11223344C', 'Lucía', 'Fernández Díaz', '08003');
+select * from alumnos;
+
+EJERCICO-2
+use adat2;
+CREATE TABLE contactos (
+    nombre VARCHAR(50) PRIMARY KEY,
+    telefono VARCHAR(15) NOT NULL
+);
+INSERT INTO contactos (nombre, telefono) VALUES 
+('Ana', '600123456'),
+('Carlos', '611987654'),
+('Lucía', '622456789');
+
+SELECT * FROM contactos;
