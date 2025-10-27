@@ -1,0 +1,103 @@
+* {
+  margin: 10px auto;
+  padding: 10px;
+}
+.contenedor {
+  display: flex;
+  flex-flow: row wrap;
+  transition: border,border-radius,box-shadow 3s ease;
+}
+.contenedor:hover {
+  border: 4px dashed darkgreen;
+  border-radius: 20px;
+  box-shadow: 10px 10px 3px 5px;
+}
+.caja {
+  width: 250px;
+  height: 200px;
+  background: #f0f0f0;
+  border: 1px solid black;
+  text-align: center;
+  line-height: 140px;
+  transition-property: border-radius, box-shadow;
+  transition-duration: 2s;
+  transition-timing-function: linear;
+}
+.caja:hover {
+  background-color: #909090;
+}
+.c1:hover {
+  border-radius: 10px 20px 30px 40px;
+  box-shadow: 12px 12px #474747;
+}
+.c2:hover {
+  border-radius: 20px 30px 40px;
+  box-shadow: 10px 10px 6px 3px #474747;
+}
+.c3:hover {
+  border-radius: 30px 40px;
+  box-shadow: inset 10px 10px 6px 3px #474747;
+}
+.c4:hover {
+  border-radius: 30px;
+  box-shadow: 10px 10px 1px 3px #ff2317,
+    	20px 20px 2px 4px #ffe417,
+    	30px 30px 3px 5px #23ff17,
+    	40px 40px 4px 6px #174dff;
+}
+.c5:hover {
+  transition-delay: 10s;
+  box-sizing: border-box;
+  width: 200px;
+  height: 200px;
+  border-radius: 100px;
+  box-shadow: 12px 15px 6px 3px rgba(0,0,0,0.4);
+}
+.barras {
+  flex-flow: column nowrap;
+  margin: 10px;
+  padding: 10px;
+  position: absolute;
+  top:330px;
+  left: 0%;
+  background-color: #606060;
+}
+.barras:hover {
+  background-color: #909090;
+}
+.barras > div {
+  width: 300px;
+  height: 30px;
+  line-height: 5px;
+  color: aliceblue;
+  background-color: #44F;
+  transition-property: width;
+  transition-duration: 4s;
+}
+.barras:hover > div {
+  width: 700px;
+}
+.ease {
+  transition-timing-function: ease;
+}
+.ease-in {
+  transition-timing-function: ease-in;
+}
+.ease-out {
+  transition-timing-function: ease-out;
+}
+.ease-in-out {
+  transition-timing-function: ease-in-out;
+}
+.linear {
+  transition-timing-function: linear;
+}
+.cubic1 {
+  transition-timing-function: cubic-bezier(1,1,1,1);
+}
+.cubic2 {
+  transition-timing-function: cubic-bezier(1,0,1,0);
+}
+.cubic3 {
+  transition-timing-function: cubic-bezier(0.1,0.3,0.5,0.7);
+}
