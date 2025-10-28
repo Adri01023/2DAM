@@ -57,5 +57,31 @@ main {
 
 section {
     border: 1px solid black;
-    background-color: yellow;
+    font-size: xx-large;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.caja {
+    display: inline-block;
+    border: 1px solid black;
+    margin: 15px;
+    padding: 5px;
+}
+
+.boton {
+    display: inline-block;
+    border: 1px solid black;
+    margin: 15px;
+    padding: 5px;
+    background-color: blue;
+}
+
+@media (max-width: 700px) {
+    img {
+        display: none;
+    }
+
+    header {
+        display: none;
+    }
 }
