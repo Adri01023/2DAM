@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Main-Class: HSQLDB_Act2_2.LeerHSQLDB
+Class-Path: lib/hsqldb.jar
+
