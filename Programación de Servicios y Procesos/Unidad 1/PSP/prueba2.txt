@@ -1,0 +1,8 @@
+fichero.txt
+listado.txt
+out
+prueba2.txt
+prueba.txt
+PSP.procesos.iml
+salida.log
+src

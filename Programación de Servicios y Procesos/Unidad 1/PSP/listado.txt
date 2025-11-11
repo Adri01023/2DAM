@@ -1,0 +1,6 @@
+listado.txt
+out
+prueba.txt
+PSP.procesos.iml
+salida.log
+src
