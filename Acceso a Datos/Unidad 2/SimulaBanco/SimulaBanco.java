@@ -3,12 +3,12 @@ import java.sql.SQLException;
 public class SimulaBanco {
 
 	public static final int NÚMERO_DE_CUENTAS = 10;
-	public static final int NÚMERO_DE_HILOS = 20;
+	public static final int NÚMERO_DE_HILOS = 4;
 	// mysql> show status like 'max_used_connections';
 	public static final int SALDO_INICIAL = 10000;
 
 	public static void main(String[] args) throws InterruptedException, SQLException {
-		Banco_Procedimiento_Almacenado banco = new Banco_Procedimiento_Almacenado(NÚMERO_DE_CUENTAS, SALDO_INICIAL);
+		Banco_HSQLDB banco = new Banco_HSQLDB(NÚMERO_DE_CUENTAS, SALDO_INICIAL);
 		
 		 // Lanza muchos hilos para realizar transferencias simultáneas:
         Thread[] hilos = new Thread[NÚMERO_DE_HILOS]; 

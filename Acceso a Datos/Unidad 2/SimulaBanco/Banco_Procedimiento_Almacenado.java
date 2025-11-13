@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
 
-import com.mysql.cj.jdbc.CallableStatement;
+import java.sql.CallableStatement;
 
 public class Banco_Procedimiento_Almacenado {
 	private final int saldoInicial;
@@ -20,8 +20,8 @@ public class Banco_Procedimiento_Almacenado {
 		this.númeroDeCuentas = numCuentas;
 
 		try {
-			conexión = DriverManager.getConnection("jdbc:mysql://localhost/adat1?allowPublicKeyRetrieval=true", "dam2",
-					"asdf.1234");
+			conexión = DriverManager.getConnection("jdbc:mysql://localhost/adat1?allowPublicKeyRetrieval=true", "root",
+					"1357");
 			// Inicializa la base de datos de cuentas:
 			Statement sql = conexión.createStatement();
 			sql.execute("DROP TABLE IF EXISTS cuentas ");
@@ -41,6 +41,18 @@ public class Banco_Procedimiento_Almacenado {
 		String sql_procedure = """
 				CREATE PROCEDURE transfiere(IN origen int, IN destino int, IN cantidad int, OUT mensajeSalida varchar(80))
 				BEGIN
+				DECLARE id_min int;
+				DECLARE id_max int;
+				START TRANSACTION;
+				IF origen < destino THEN
+				SET id_min = origen;
+				SET id_max = destino;
+				ELSE
+				SET id_min = destino;
+				SET id_max = origen;
+				END IF;
+				SELECT saldo FROM cuentas WHERE id = id_min FOR UPDATE;
+				SELECT saldo FROM cuentas WHERE id = id_max FOR UPDATE;
 				SET mensajeSalida = "Todo ha salido bien";
 				IF (SELECT saldo from cuentas where id = origen) > cantidad THEN
 				UPDATE cuentas SET saldo = saldo + cantidad where id = destino;
@@ -51,6 +63,7 @@ public class Banco_Procedimiento_Almacenado {
 				IF (SELECT saldo from cuentas where id = origen) < 0 THEN
 				SET mensajeSalida = concat("Descubierto en cuenta ",origen," saldo: ",(SELECT saldo from cuentas where id = origen));
 				END IF;
+				COMMIT;
 				END
 				""";
 		try {
@@ -59,7 +72,7 @@ public class Banco_Procedimiento_Almacenado {
 				PreparedStatement procedure = conexiónHilo.prepareStatement(sql_procedure);
 				procedure.executeUpdate();
 			}
-			java.sql.CallableStatement llamar_procedimiento = conexiónHilo.prepareCall("{call transfiere(?,?,?,?)}");
+			CallableStatement llamar_procedimiento = conexiónHilo.prepareCall("{call transfiere(?,?,?,?)}");
 			llamar_procedimiento.setInt(1, origen);
 			llamar_procedimiento.setInt(2, destino);
 			llamar_procedimiento.setInt(3, cantidad);
