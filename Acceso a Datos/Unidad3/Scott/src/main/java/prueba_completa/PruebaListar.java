@@ -18,6 +18,7 @@ public class PruebaListar {
 	                    .createQuery("SELECT e FROM Empleado e", Empleado.class)
 	                    .getResultList();
 	            for (Empleado e : empleados) {
+	            	for (Proyecto p : e.getProyectos()) {}
 	            	System.out.println(e);
 	            }
 	            em.getTransaction().commit();

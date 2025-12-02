@@ -9,12 +9,12 @@ public class PruebaUpdate {
         EntityManagerFactory emf =
                 Persistence.createEntityManagerFactory("UnidadEmpleados");
         EntityManager em = emf.createEntityManager();
+        Proyecto proyecto = new Proyecto("AVENTADOR");
         try {
             em.getTransaction().begin();
             Empleado yo = em.find(Empleado.class, 2);
-            yo.setJob("Nini");
-            em.persist(new Departamento("Casa Ruben","Torre Arias"));
-            yo.setNumdept(em.find(Departamento.class, 3));
+            em.persist(proyecto);
+            yo.addProyecto(proyecto);
             em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();

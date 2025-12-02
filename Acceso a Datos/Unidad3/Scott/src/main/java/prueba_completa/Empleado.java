@@ -1,6 +1,8 @@
 package prueba_completa;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -8,6 +10,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -32,6 +36,14 @@ public class Empleado {
 	@ManyToOne
 	@JoinColumn(name = "deptno")
 	Departamento numdept;
+	@ManyToMany
+	@JoinTable(
+	    name = "empleado_proyecto",
+	    joinColumns = @JoinColumn(name = "empleado_id"), // joinColumns para parte poseedora
+	    inverseJoinColumns = @JoinColumn(name = "proyecto_id") // inverseJoinColumns para parte poseída
+	)
+	private List<Proyecto> proyectos = new ArrayList<>();
+
 	
 	public Empleado() {}
 	public Empleado(String ename, String job, Salario salario, Departamento numdept) {
@@ -110,14 +122,35 @@ public class Empleado {
 		this.numdept = numdept;
 	}
 	
+	public List<Proyecto> getProyectos() {
+		return proyectos;
+	}
+	public void setProyectos(List<Proyecto> proyectos) {
+		this.proyectos = proyectos;
+	}
+	public void addProyecto(Proyecto proyecto) {
+	    if (!proyectos.contains(proyecto)) {
+	        proyectos.add(proyecto);
+	        proyecto.getEmpleados().add(this); // mantener sincronía bidireccional
+	    }
+	}
+	
+	public void removeProyecto(Proyecto proyecto) {
+	    if (proyectos.contains(proyecto)) {
+	        proyectos.remove(proyecto);
+	        proyecto.getEmpleados().remove(this); // mantener sincronía bidireccional
+	    }
+	}
+
+	
 	@Override
 	public String toString() {
 		if (this.getManager() != null) {
 			return "Empleado: " + getId_emp() + " Nombre: " + getEname() + " Puesto: " + getJob() + " Manager: " + getManager().getEname() + 
-					" Salario: " +  getSalario() + " Departamento: " + getNumdept();
+					" Salario: " +  getSalario() + " Departamento: " + getNumdept() + " Proyectos: " + getProyectos();
 		} else {
 			return "Empleado: " + getId_emp() + " Nombre: " + getEname() + " Puesto: " + getJob() + " Manager: No tiene" + 
-					" Salario: " +  getSalario() + " Departamento: " + getNumdept();
+					" Salario: " +  getSalario() + " Departamento: " + getNumdept() + " Proyectos: " + getProyectos();
 		}
 		
 	}
