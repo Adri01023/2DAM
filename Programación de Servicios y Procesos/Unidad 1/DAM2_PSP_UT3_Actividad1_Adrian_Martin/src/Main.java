@@ -129,19 +129,47 @@ public class Main {
     }
 
     public static Map<Integer,String> detectarServicio() {
+        Integer i = 1;
         Map<Integer,String> mapa = new LinkedHashMap<>();
         try {
             BufferedReader br = new BufferedReader(new FileReader("ficheroWKP.txt"));
             String linea;
             while ((linea = br.readLine()) != null) {
-                for (Integer i = 1; i <= NUMPUERTOS; i++) {
-                    String cadenapuerto = i + "/tcp";
-                    if (linea.contains(cadenapuerto)) {
-                        System.out.println(linea);
-                            String [] separadolinea = linea.split(" ");
-                            System.out.println(i + " "+ separadolinea[0]); // QUITAR BUCLE FOR REITERA MUCHO
-                            mapa.put(i,separadolinea[0]);
-                    }
+                String cadenapuerto = i + "/tcp";
+                if (linea.contains(cadenapuerto)) {
+                    String[] separadolinea = linea.split(" ");
+                    mapa.put(i, separadolinea[0]);
+                    i++;
+                } else if (linea.contains((i + 1) + "/tcp")) {
+                    String[] separadolinea = linea.split(" ");
+                    mapa.put(i, separadolinea[0]);
+                    i++;
+                } else if (i == 225) {
+                    i = 242;
+                } else if (i == 249) {
+                    i = 256;
+                } else if (i == 269) {
+                    i = 280;
+                } else if (i == 287) {
+                    i = 308;
+                } else if (i == 323) {
+                    i = 333;
+                } else if (i == 334) {
+                    i = 344;
+                } else if (i == 702) {
+                    i = 704;  // MUCHOS SALTOS ENTRE PUERTOS
+                } else if (i == 712) {
+                    i = 729;
+                } else if (i == 732) {
+                    i = 741;
+                } else if (i == 744) {
+                    i = 747;
+                } else if (i == 755) {
+                    i = 758;
+                } else if (i == 767) {
+                    i = 769;
+                } else if (i == 778) {
+                    i = 800;
                 }
             }
             return mapa;
