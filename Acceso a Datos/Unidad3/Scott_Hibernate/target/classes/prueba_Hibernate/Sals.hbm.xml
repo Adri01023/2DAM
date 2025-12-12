@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 12 dic 2025, 9:01:05 by Hibernate Tools 6.4.8.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class catalog="adat1" name="prueba_Hibernate.Sals" optimistic-lock="none" table="sals">
+        <id name="grade" type="int">
+            <column name="grade"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="quantity" type="java.lang.Integer">
+            <column name="quantity" unique="true"/>
+        </property>
+        <set fetch="select" inverse="true" lazy="true" name="emps" table="emp">
+            <key>
+                <column name="grade"/>
+            </key>
+            <one-to-many class="prueba_Hibernate.Emp"/>
+        </set>
+    </class>
+</hibernate-mapping>

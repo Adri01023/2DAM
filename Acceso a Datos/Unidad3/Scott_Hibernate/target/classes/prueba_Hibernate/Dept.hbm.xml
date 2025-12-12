@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 12 dic 2025, 9:01:05 by Hibernate Tools 6.4.8.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class catalog="adat1" name="prueba_Hibernate.Dept" optimistic-lock="none" table="dept">
+        <id name="deptno" type="java.lang.Integer">
+            <column name="deptno"/>
+            <generator class="identity"/>
+        </id>
+        <property name="loc" type="string">
+            <column length="255" name="loc"/>
+        </property>
+        <property name="deptname" type="string">
+            <column length="255" name="deptname"/>
+        </property>
+        <set fetch="select" inverse="true" lazy="true" name="emps" table="emp">
+            <key>
+                <column name="deptno"/>
+            </key>
+            <one-to-many class="prueba_Hibernate.Emp"/>
+        </set>
+    </class>
+</hibernate-mapping>

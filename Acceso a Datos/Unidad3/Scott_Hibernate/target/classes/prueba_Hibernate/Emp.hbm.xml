@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 12 dic 2025, 9:01:05 by Hibernate Tools 6.4.8.Final -->
+<hibernate-mapping>
+ <class catalog="adat1" name="prueba_Hibernate.Emp"
+  optimistic-lock="none" table="emp">
+  <id name="empno" type="java.lang.Integer">
+   <column name="empno"/>
+   <generator class="identity"/>
+  </id>
+  <many-to-one class="prueba_Hibernate.Sals" fetch="select" name="sals">
+   <column name="grade"/>
+  </many-to-one>
+  <many-to-one class="prueba_Hibernate.Emp" fetch="select" name="emp">
+   <column name="empno_manager"/>
+  </many-to-one>
+  <many-to-one class="prueba_Hibernate.Dept" fetch="select" name="dept">
+   <column name="deptno"/>
+  </many-to-one>
+  <property generated="never" lazy="false" name="ename" type="string">
+   <column length="255" name="ename"/>
+  </property>
+  <property generated="never" lazy="false" name="hiredate" type="date">
+   <column length="10" name="hiredate"/>
+  </property>
+  <property generated="never" lazy="false" name="job" type="string">
+   <column length="255" name="job"/>
+  </property>
+  <set fetch="select" inverse="true" lazy="true" name="emps"
+   sort="unsorted" table="emp">
+   <key>
+    <column name="empno_manager"/>
+   </key>
+   <one-to-many class="prueba_Hibernate.Emp"/>
+  </set>
+  <set fetch="select" lazy="true" name="proyectoses" sort="unsorted" table="empleado_proyecto">
+   <key>
+    <column name="empleado_id" not-null="true"/>
+   </key>
+   <many-to-many entity-name="prueba_Hibernate.Proyectos" unique="false">
+    <column name="proyecto_id" not-null="true"/>
+   </many-to-many>
+  </set>
+  <query name="empleadosPorSalario">SELECT e.ename, s.quantity FROM Emp e JOIN e.sals s ORDER BY s.quantity DESC</query>
+  <query name="empleadosCiertaInfo">FROM Emp e</query>
+ </class>
+</hibernate-mapping>
